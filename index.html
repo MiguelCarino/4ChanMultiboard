@@ -20,19 +20,19 @@
 		<meta property="og:locale" content="en_US" />
 		<link rel="stylesheet" href="assets/css/main.css" />
         <link rel="icon" href="#">
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
+		</head>
 	<style>
 		
 	  </style> 
 	<body class="is-preload">
 		<!-- Wrapper -->
-			<div id="wrapper">
+			<div id="wrapper" class="">
 				<!-- Header -->
 					<header id="header" class="alt">
 						<a href="index.html" class="logo"><strong>4chan</strong> <span>Multiboard Reader<b style="color:greenyellow;"></b></span></a>
 					</header>
 				<!-- Menu -->
+                
 				<!-- This ought to be buttons -->
 				<!--Background animations-->
 				<!-- Pending -->
@@ -47,10 +47,27 @@
 
 						<!-- One -->
 							<section id="one" class="">
-								<div class="container">
-									<div class="column">
-									 <span>BLOCK</span>
-									</div>
+								
+									<button data-iframe="iframe1">/g/ - Technology</button>
+                                    <button data-iframe="iframe2">/int/ - International</button>
+                                    <button data-iframe="iframe3">/mu/ - Music</button>
+                                   
+                                        <div class="column">
+                                            <div id="iframe1" class="iframe-container">
+                                                <iframe src="https://4chan.org/g/#delform" frameborder="0"></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="column">
+                                            <div id="iframe2" class="iframe-container">
+                                                <iframe src="https://4chan.org/int/#delform" frameborder="1"></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="column">
+                                            <div id="iframe3" class="iframe-container">
+                                                <iframe src="https://4chan.org/mu/#delform" frameborder="2"></iframe>
+                                            </div>
+                                        </div>
+                                 
 								</div>
 								<div class="container">
 								</div>
@@ -72,7 +89,33 @@
 			</div>
 
 		<!-- Scripts -->
-        <script></script>
+        <script>
+        // Function to toggle a board's visibility once clicked on its button
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function() {
+                const iframeID = this.getAttribute('data-iframe');
+                const iframeContainer = document.getElementById(iframeID);
+        
+                // Check if the iframe is already visible
+                if (iframeContainer.style.display === 'block') {
+                    // If so, hide it
+                    iframeContainer.style.display = 'none';
+                } else {
+                    // Optional: Hide all other iframes before showing the selected one
+                    // Uncomment the lines below if you want to ensure only one iframe is visible at a time
+                    /*
+                    document.querySelectorAll('.iframe-container').forEach(container => {
+                        container.style.display = 'none';
+                    });
+                    */
+        
+                    // Show the selected iframe
+                    iframeContainer.style.display = 'block';
+                }
+            });
+        });
+            
+        </script>
 		<!--End of scripts-->
 	</body>
 </html>
