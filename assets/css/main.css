@@ -168,33 +168,27 @@ body{
   }
 
   /*Containers*/
-  .container {
-      display: flex; /* Align columns side by side */
-      flex-wrap: wrap;
-      border-radius: 20px;
+   .flex-container {
+        flex-direction: row;
     }
-    .column {
-      flex: 1; /* Each column takes equal width */
-      padding: 10px; /* Spacing inside each column */
-    }
-    .center-div {
-      margin-bottom: 10px; /* Spacing between child divs */
-      background-color: rgba(211, 211, 211, 0); /* Visual distinction */
-      padding: auto; /* Padding inside child divs */
-      text-align: center; /* Centering text inside child divs */
-      min-width: 40%;
-    }
-  .side-div {
-      margin-bottom: 10px; /* Spacing between child divs */
-      background-color: rgba(211, 211, 211, 0); /* Visual distinction */
-      padding: auto; /* Padding inside child divs */
-      text-align: center; /* Centering text inside child divs */
-        min-width: 30%;
+    /*
+                iframe.style.width = '30%';
+                iframe.style.width = '30%';
+                iframe.style.height = '500px'; // Example height, adjust as needed*/
+    .flex-item {
+        width:32%;
+        height: 385px;
+        padding: 2px;
+        margin: 3px;
+        margin-bottom: -4px;
+        border: 2px solid #000000;
+        border-radius: 15px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     /* CSS styles for the iframe */
     iframe {
-        width: 100%;
-        height: 500px;
+        height: 385px;
+        width:32%;
     }
 
 /*Animations*/
