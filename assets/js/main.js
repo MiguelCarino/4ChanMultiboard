@@ -52,6 +52,9 @@ document.addEventListener('DOMContentLoaded', function() {
         { url: 'https://4chan.org/x/#index-options', name: '/x/ - Paranormal' },
         { url: 'https://4chan.org/qa/#index-options', name: '/qa/ - Questions & Answers' },
         { url: 'https://rbeesley.github.io/MicrosoftEdge-SURF/', name: 'Surf game' },
+        //{ url: 'https://carino.systems/software.html', name: 'Software Solutions' },
+        //{ url: 'https://carino.systems/start.html', name: 'Start' },
+        //{ url: 'https://carino.systems/lurking.html', name: 'Lurking' },
     ];
 
     const buttonsContainer = document.getElementById('buttons');
