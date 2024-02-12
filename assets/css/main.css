@@ -167,6 +167,10 @@ body{
     visibility: hidden; /* Keep your hidden submit button */
   }
 
+  /*Buttons*/
+  .selected {
+    background-color: rgb(29, 172, 0); /* Change to the color you want for selected buttons */
+  }
   /*Containers*/
    .flex-container {
         flex-direction: row;

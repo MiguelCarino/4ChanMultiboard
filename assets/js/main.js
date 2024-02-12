@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const iframeSources = [
-        { url: 'https://4chan.org/a/catalog#index-options', name: '/a/ - Anime & Manga' },
+        { url: 'https://anychans.github.io/4chan/a/', name: '/a/ - Anime & Manga' },
         { url: 'https://4chan.org/c/#index-options', name: '/c/ - Anime/Cute' },
         { url: 'https://4chan.org/w/#index-options', name: '/w/ - Anime/Wallpapers' },
         { url: 'https://4chan.org/m/#index-options', name: '/m/ - Mecha' },
@@ -56,19 +56,21 @@ document.addEventListener('DOMContentLoaded', function() {
         //{ url: 'https://carino.systems/start.html', name: 'Start' },
         //{ url: 'https://carino.systems/lurking.html', name: 'Lurking' },
     ];
-
     const buttonsContainer = document.getElementById('buttons');
     const iframesContainer = document.getElementById('iframes');
-
+    
+    const selectedButtons = new Set();
+    
     iframeSources.forEach((iframeSource, index) => {
         // Creates button
         let button = document.createElement('button');
         button.textContent = iframeSource.name; // Use the name property for the button text
         button.addEventListener('click', function() {
             toggleIframe(`iframe${index + 1}`); // Pass the iframe ID directly
+            toggleButtonSelection(this); // Toggle selection for clicked button
         });
         buttonsContainer.appendChild(button);
-
+    
         // Create iframe with URL from the iframeSource
         let iframe = document.createElement('iframe');
         iframe.classList.add('flex-item');
@@ -77,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
         iframe.setAttribute('id', `iframe${index + 1}`);
         iframesContainer.appendChild(iframe);
     });
-
+    
     function toggleIframe(iframeId) {
         let iframe = document.getElementById(iframeId);
         // Determine current visibility before toggling
@@ -86,14 +88,34 @@ document.addEventListener('DOMContentLoaded', function() {
         iframe.style.display = isVisible ? 'none' : ''; 
         // Update URL after toggling visibility
         updateURL(iframeId, !isVisible); // Pass the new visibility state
-    }    
-
+    }
+    
+    function toggleButtonSelection(button) {
+        // Toggle the selected state for the clicked button
+        const isSelected = selectedButtons.has(button);
+        if (isSelected) {
+            selectedButtons.delete(button);
+        } else {
+            selectedButtons.add(button);
+        }
+    
+        // Update the button styles based on the selected state
+        document.querySelectorAll('button').forEach(btn => {
+            if (selectedButtons.has(btn)) {
+                btn.classList.add('selected');
+            } else {
+                btn.classList.remove('selected');
+            }
+        });
+    }
+    
     function updateURL(iframeId, isVisible) {
         const url = new URL(window.location);
         url.searchParams.set(iframeId, isVisible ? '1' : '0'); // Set parameter for visibility
         history.pushState({}, '', url); // Update URL without reloading
     }
     
+    // Set selected state of buttons based on URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     iframeSources.forEach((iframeSource, index) => {
         const iframeId = `iframe${index + 1}`;
@@ -101,6 +123,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const isVisible = urlParams.get(iframeId) === '1';
             let iframe = document.getElementById(iframeId);
             iframe.style.display = isVisible ? '' : 'none';
+            if (isVisible) {
+                let button = document.querySelector(`button:nth-child(${index + 1})`); // Find the button by its index
+                if (button) {
+                    selectedButtons.add(button);
+                    button.classList.add('selected');
+                }
+            }
         }
     });
+    
 });
