@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function toggleIframe(iframeId) {
         let iframe = document.getElementById(iframeId);
-        iframe.style.display = iframe.style.display === 'none' ? 'block' : 'none';
+        iframe.style.display = iframe.style.display === 'none' ? '' : 'none'; // Adjusted line
     }
+    
 });
