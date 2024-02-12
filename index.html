@@ -47,30 +47,8 @@
 
 						<!-- One -->
 							<section id="one" class="">
-								
-									<button data-iframe="iframe1">/g/ - Technology</button>
-                                    <button data-iframe="iframe2">/int/ - International</button>
-                                    <button data-iframe="iframe3">/mu/ - Music</button>
-                                   
-                                        <div class="column">
-                                            <div id="iframe1" class="iframe-container">
-                                                <iframe src="https://4chan.org/g/#delform" frameborder="0"></iframe>
-                                            </div>
-                                        </div>
-                                        <div class="column">
-                                            <div id="iframe2" class="iframe-container">
-                                                <iframe src="https://4chan.org/int/#delform" frameborder="1"></iframe>
-                                            </div>
-                                        </div>
-                                        <div class="column">
-                                            <div id="iframe3" class="iframe-container">
-                                                <iframe src="https://4chan.org/mu/#delform" frameborder="2"></iframe>
-                                            </div>
-                                        </div>
-                                 
-								</div>
-								<div class="container">
-								</div>
+                                <div id="buttons"></div>
+                                <div id="iframes"></div>
 							</section>
 					</div>
 				<!-- Footer -->
@@ -90,31 +68,39 @@
 
 		<!-- Scripts -->
         <script>
-        // Function to toggle a board's visibility once clicked on its button
-        document.querySelectorAll('button').forEach(button => {
-            button.addEventListener('click', function() {
-                const iframeID = this.getAttribute('data-iframe');
-                const iframeContainer = document.getElementById(iframeID);
+        document.addEventListener('DOMContentLoaded', function() {
+            const iframeSources = [
+                { url: 'https://4chan.org/int/#index-options', name: '/g/ - Technology' },
+                { url: 'https://4chan.org/g/#index-options', name: '/g/ - Technology' },
+                { url: 'https://4chan.org/mu/#index-options', name: '/g/ - Technology' },
+            ];
         
-                // Check if the iframe is already visible
-                if (iframeContainer.style.display === 'block') {
-                    // If so, hide it
-                    iframeContainer.style.display = 'none';
-                } else {
-                    // Optional: Hide all other iframes before showing the selected one
-                    // Uncomment the lines below if you want to ensure only one iframe is visible at a time
-                    /*
-                    document.querySelectorAll('.iframe-container').forEach(container => {
-                        container.style.display = 'none';
-                    });
-                    */
+            const buttonsContainer = document.getElementById('buttons');
+            const iframesContainer = document.getElementById('iframes');
         
-                    // Show the selected iframe
-                    iframeContainer.style.display = 'block';
-                }
+            iframeSources.forEach((iframeSource, index) => {
+                // Creates buttons
+                let button = document.createElement('button');
+                button.textContent = iframeSource.name; // Use the name property for the button text
+                button.addEventListener('click', function() {
+                    toggleIframe(index + 1);
+                });
+                buttonsContainer.appendChild(button);
+        
+                // Create iframe with URL from the iframeSource
+                let iframe = document.createElement('iframe');
+                iframe.style.display = 'none'; // Start hidden
+                iframe.setAttribute('src', iframeSource.url); // Use the url property for the iframe source
+                iframe.setAttribute('id', `iframe${index + 1}`);
+                iframesContainer.appendChild(iframe);
             });
+        
+            function toggleIframe(index) {
+                let iframe = document.getElementById(`iframe${index}`);
+                iframe.style.display = iframe.style.display === 'none' ? 'block' : 'none';
+            }
         });
-            
+        
         </script>
 		<!--End of scripts-->
 	</body>
