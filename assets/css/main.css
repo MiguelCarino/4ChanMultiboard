@@ -170,6 +170,7 @@ body{
   /*Containers*/
    .flex-container {
         flex-direction: row;
+        width: auto;
     }
     /*
                 iframe.style.width = '30%';
