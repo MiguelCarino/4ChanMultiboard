@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { url: 'https://4chan.org/s4s/#index-options', name: '/s4s/ - Shit 4chan Says' },
         { url: 'https://4chan.org/x/#index-options', name: '/x/ - Paranormal' },
         { url: 'https://4chan.org/qa/#index-options', name: '/qa/ - Questions & Answers' },
+        { url: 'https://rbeesley.github.io/MicrosoftEdge-SURF/', name: 'Surf game' },
     ];
 
     const buttonsContainer = document.getElementById('buttons');
