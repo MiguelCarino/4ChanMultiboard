@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const iframeSources = [
-        { url: 'https://anychans.github.io/4chan/a/', name: '/a/ - Anime & Manga' },
+        { url: 'https://4chan.org/a/#index-options', name: '/a/ - Anime & Manga' },
         { url: 'https://4chan.org/c/#index-options', name: '/c/ - Anime/Cute' },
         { url: 'https://4chan.org/w/#index-options', name: '/w/ - Anime/Wallpapers' },
         { url: 'https://4chan.org/m/#index-options', name: '/m/ - Mecha' },
@@ -55,11 +55,12 @@ document.addEventListener('DOMContentLoaded', function() {
         //{ url: 'https://carino.systems/software.html', name: 'Software Solutions' },
         //{ url: 'https://carino.systems/start.html', name: 'Start' },
         //{ url: 'https://carino.systems/lurking.html', name: 'Lurking' },
-    ];
-    const buttonsContainer = document.getElementById('buttons');
+    ];const buttonsContainer = document.getElementById('buttons');
     const iframesContainer = document.getElementById('iframes');
+    const refreshButtonContainer = document.getElementById('refreshButtonContainer'); // New container for the refresh button
     
     const selectedButtons = new Set();
+    const iframes = [];
     
     iframeSources.forEach((iframeSource, index) => {
         // Creates button
@@ -78,6 +79,9 @@ document.addEventListener('DOMContentLoaded', function() {
         iframe.setAttribute('src', iframeSource.url); // Use the url property for the iframe source
         iframe.setAttribute('id', `iframe${index + 1}`);
         iframesContainer.appendChild(iframe);
+    
+        // Add iframe reference to the array
+        iframes.push(iframe);
     });
     
     function toggleIframe(iframeId) {
@@ -132,5 +136,28 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+    
+    // Create a button to refresh visible iframes
+    const refreshButton = document.createElement('button');
+    refreshButton.textContent = 'Refresh Boards';
+    
+    // Function to refresh visible iframes
+    function refreshVisibleIframes() {
+        // Iterate over all iframes
+        iframes.forEach((iframe, index) => {
+            // Check if the corresponding button is selected
+            if (selectedButtons.has(buttonsContainer.children[index])) {
+                // Reload the iframe by resetting its src attribute
+                iframe.setAttribute('src', iframe.getAttribute('src'));
+            }
+        });
+    }
+    
+    // Add event listener to the refresh button
+    refreshButton.addEventListener('click', refreshVisibleIframes);
+    
+    // Append the refresh button to the new container
+    refreshButtonContainer.appendChild(refreshButton);
+    
     
 });
